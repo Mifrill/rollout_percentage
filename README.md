@@ -1,8 +1,23 @@
 # RolloutPercentage
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rollout_percentage`. To experiment with that code, run `bin/console` for an interactive prompt.
+The implementation of user-percentages feature but without required object
+https://github.com/fetlife/rollout#user-percentages
 
-TODO: Delete this and the text above, and describe your gem
+`feature_flag - @symbol`
+`percentage_enabling - @integer`
+
+Manage percentage by rails console:
+
+    Rails.application.redis_client.set(feature_flag, percentage_enabling)
+
+How to use:
+
+    RolloutPercentage.new(feature_flag: feature_flag).perform
+     returns the boolean randomized by percentage
+    
+    RolloutPercentage.new(feature_flag: :feature_flag).perform do
+     some block code here which should be run on randomized by percentage
+    end
 
 ## Installation
 
