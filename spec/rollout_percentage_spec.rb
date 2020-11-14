@@ -11,6 +11,7 @@ describe RolloutPercentage do
   let(:client_expectation) do
     -> { expect(rollout_client).to receive(:get).with(feature_flag).and_return(percentage_enabling) }
   end
+  let(:target_block) { Class.new { def call(*); end } }
 
   context 'when disabled' do
     before { client_expectation.call }
@@ -30,6 +31,15 @@ describe RolloutPercentage do
 
       its(:perform) { is_expected.to eq(false) }
     end
+
+    context 'when block passed' do
+      it 'fires passed block' do
+        expect(target_block).not_to receive(:call)
+        rollout_percentage.perform do
+          target_block.call
+        end
+      end
+    end
   end
 
   context 'when enabled' do
@@ -38,5 +48,14 @@ describe RolloutPercentage do
     let(:percentage_enabling) { '100' }
 
     its(:perform) { is_expected.to eq(true) }
+
+    context 'when block passed' do
+      it 'fires passed block' do
+        expect(target_block).to receive(:call).once
+        rollout_percentage.perform do
+          target_block.call
+        end
+      end
+    end
   end
 end
