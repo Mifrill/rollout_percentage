@@ -3,22 +3,6 @@
 The implementation of user-percentages feature but without required object
 https://github.com/fetlife/rollout#user-percentages
 
-`feature_flag - @symbol`
-`percentage_enabling - @integer`
-
-Manage percentage by rails console:
-
-    Rails.application.redis_client.set(feature_flag, percentage_enabling)
-
-How to use:
-
-    RolloutPercentage.new(feature_flag: feature_flag).perform
-     returns the boolean randomized by percentage
-    
-    RolloutPercentage.new(feature_flag: :feature_flag).perform do
-     some block code here which should be run on randomized by percentage
-    end
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -37,7 +21,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Manage percentage by rails console:
+
+`feature_flag - @symbol`
+`percentage_enabling - @integer`
+
+    Rails.application.redis_client.set(feature_flag, percentage_enabling)
+    Rails.application.redis_client.get(feature_flag)
+
+### Rollout Client example
+
+Simple implementation with [redis-rb](https://github.com/redis/redis-rb)
+
+    require 'redis'
+    
+    class RolloutClient
+      attr_accessor :redis
+    
+      def initialize(**args)
+        self.redis = Redis.new(args)
+      end
+    
+      def get(arg)
+        redis.get(arg)
+      end
+    end
+
+RolloutPercentage usage example:
+
+    rollout_client = RolloutClient.new(url: url)
+
+    RolloutPercentage.new(feature_flag: feature_flag, rollout_client: rollout_client).perform
+      # => returns the boolean randomized by percentage
+
+    RolloutPercentage.new(feature_flag: :feature_flag, rollout_client: rollout_client).perform do
+      # => some block code here which should be run on randomized by percentage
+    end
 
 ## Development
 
@@ -47,7 +66,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rollout_percentage. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/rollout_percentage/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/Mifrill/rollout_percentage. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Mifrill/rollout_percentage/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
@@ -56,4 +75,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the RolloutPercentage project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/rollout_percentage/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the RolloutPercentage project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Mifrill/rollout_percentage/blob/master/CODE_OF_CONDUCT.md).
