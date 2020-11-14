@@ -1,4 +1,4 @@
-require "rollout_percentage/version"
+require 'rollout_percentage/version'
 
 module RolloutPercentage
   class Error < StandardError; end
