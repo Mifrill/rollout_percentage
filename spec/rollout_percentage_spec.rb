@@ -3,7 +3,7 @@ describe RolloutPercentage do
     expect(RolloutPercentage::VERSION).not_to be_nil
   end
 
-  subject(:rollout_percentage) { described_class.new(feature_flag, rollout_client: rollout_client) }
+  subject(:rollout_percentage) { described_class.new(feature_flag: feature_flag, rollout_client: rollout_client) }
 
   let(:rollout_client_klass) { Class.new { def get(*); end } }
   let(:rollout_client) { instance_double(rollout_client_klass) }

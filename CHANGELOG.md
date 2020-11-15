@@ -1,3 +1,9 @@
+[0.1.1]: https://github.com/Mifrill/rollout_percentage/releases/tag/v0.1.0
+
+## [0.1.1] ##
+
+- apply hash reference for argument feature_flag
+
 [0.1.0]: https://github.com/Mifrill/rollout_percentage/releases/tag/v0.1.0
 
 ## [0.1.0] ##
