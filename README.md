@@ -41,7 +41,7 @@ Simple implementation with [redis-rb](https://github.com/redis/redis-rb)
       end
 
       def set(arg)
-        redis.get(arg)
+        redis.set(arg)
       end
     end
 
