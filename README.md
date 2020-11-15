@@ -36,12 +36,12 @@ Simple implementation with [redis-rb](https://github.com/redis/redis-rb)
         self.redis = Redis.new(args)
       end
     
-      def get(arg)
-        redis.get(arg)
+      def get(key)
+        redis.get(key)
       end
 
-      def set(arg)
-        redis.set(arg)
+      def set(key, value)
+        redis.set(key, value)
       end
     end
 
