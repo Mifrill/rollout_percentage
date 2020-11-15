@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Mifrill/rollout_percentage.svg?style=svg)](https://app.circleci.com/pipelines/github/Mifrill/rollout_percentage)
+
 # RolloutPercentage
 
 The implementation of user-percentages feature but without required object
