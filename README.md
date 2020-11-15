@@ -21,14 +21,6 @@ Or install it yourself as:
 
 ## Usage
 
-Manage percentage by rails console:
-
-`feature_flag - @symbol`
-`percentage_enabling - @integer`
-
-    Rails.application.redis_client.set(feature_flag, percentage_enabling)
-    Rails.application.redis_client.get(feature_flag)
-
 ### Rollout Client example
 
 Simple implementation with [redis-rb](https://github.com/redis/redis-rb)
@@ -45,11 +37,23 @@ Simple implementation with [redis-rb](https://github.com/redis/redis-rb)
       def get(arg)
         redis.get(arg)
       end
+
+      def set(arg)
+        redis.get(arg)
+      end
     end
 
-RolloutPercentage usage example:
+Manage percentage by rails console:
 
     rollout_client = RolloutClient.new(url: url)
+
+`feature_flag - @symbol`
+`percentage_enabling - @integer`
+
+    rollout_client.set(feature_flag, percentage_enabling)
+    rollout_client.get(feature_flag)
+
+RolloutPercentage usage example:
 
     RolloutPercentage.new(feature_flag: feature_flag, rollout_client: rollout_client).perform
       # => returns the boolean randomized by percentage
