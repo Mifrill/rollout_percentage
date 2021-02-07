@@ -66,7 +66,7 @@ RolloutPercentage usage example:
 
 ## Development
 
-After checking out the repo, run `bundle install` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle install` to install dependencies. Then, run `rake spec` to run the tests.
 
 To install this gem onto your local machine, run `rake install`. To release a new version, update the version number (`RolloutPercentage::VERSION`) in `lib/rollout_percentage.rb`, and then run `rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 

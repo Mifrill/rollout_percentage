@@ -1,5 +1,5 @@
 class RolloutPercentage
-  VERSION = '0.1.1'.freeze
+  VERSION = '0.1.2'.freeze
 
   def initialize(feature_flag:, rollout_client:)
     self.feature_flag = feature_flag
